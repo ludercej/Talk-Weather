@@ -34,6 +34,13 @@ jobs:
                 -X POST \
                 -d '{
                 "contents": [{
-                    "parts":[{"text": "'$prompt'"}],
+                    "parts":[{"text": "'"$prompt"'"}],
                     }]
                 }'
+
+                # Vérifier le code de réponse HTTP
+                http_code=$(echo "$response" | tail -n 1)
+                if [ "$http_code" -ne 200 ]; then
+                echo "Erreur : Réponse de l'API avec code $http_code"
+                exit 1
+                fi
