@@ -27,5 +27,5 @@ jobs:
             # Action de l'API de météo
             - name: Get the weather
               run: |
-                $wttr = curl wttr.in/Paris
-                echo $wttr
+                wttr=$(curl https://wttr.in/Paris)
+                echo "$wttr"
