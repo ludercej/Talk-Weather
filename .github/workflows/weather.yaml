@@ -28,23 +28,15 @@ jobs:
             - name: Get the weather
               run: |
                 wttr=$(curl -s https://wttr.in/Paris)
-                if [ -z "$wttr" ]; then
-                 echo "Erreur : Impossible de récupérer la météo."
-                 exit 1
-                fi
-                prompt="Résume la météo à Paris à partir de la réponse suivante : $wttr"
-                response=$(curl -s -w "%{http_code}" "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${{ secrets.TALK_WEATHER }}" \
-                  -H 'Content-Type: application/json' \
-                  -X POST \
-                  -d '{
-                  "contents": [{
-                    "parts":[{"text": "'"$prompt"'"}]
-                  }]
+                prompt="Résume la météo à Paris à partir de la réponse suivante : 24deg"
+                
+                reponse=$(curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${{ secrets.GEMINI_KEY }}" \
+                -H 'Content-Type: application/json' \
+                -X POST \
+                -d '{
+                "contents": [{
+                    "parts":[{"text": "Résume la météo à Paris à partir de la réponse suivante : 24deg"}],
+                    }]
                 }')
 
-                # Vérifier le code de réponse HTTP
-                http_code=$(echo "$response" | tail -n 1)
-                if [ "$http_code" -ne 200 ]; then
-                echo "Erreur : Réponse de l'API avec code $http_code"
-                exit 1
-                fi
+                echo "$reponse"
