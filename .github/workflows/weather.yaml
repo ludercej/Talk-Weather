@@ -30,7 +30,7 @@ jobs:
                 wttr=$(curl -s https://wttr.in/Paris)
                 prompt="Résume la météo à Paris à partir de la réponse suivante : 24deg"
                 
-                reponse=$(curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${{ secrets.GEMINI_KEY }}" \
+                reponse=$(curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${{ secrets.TALK_WEATHER }}" \
                 -H 'Content-Type: application/json' \
                 -X POST \
                 -d '{
