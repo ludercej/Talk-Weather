@@ -1,0 +1,24 @@
+# Nom du workflow
+name : Talk Weather
+
+# Déclencheur de l'action
+on:
+    schedule:
+        # Change 2 minutes
+        - cron: "*/2 * * * *"
+
+# les taches à executer
+jobs:
+    # nom de la tache
+    ask-weather:
+        # Environnement 
+        runs-on : ubuntu-latest
+        # Etapes
+        steps:
+            - name : Checkout
+              uses : actions/checkout@v4
+
+         # Action de l'Api de météo
+            - name : Get the weather
+              run :
+                curl wttr.in/Paris 
