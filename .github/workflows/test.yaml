@@ -8,6 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: luderce/hello-action@v1
+      - uses: ludercej/hello-action@v1
         with:
           name: Martin
